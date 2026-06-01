@@ -1,19 +1,48 @@
 #console {
 	font-family: monospace;
-	font-size: 15px;
+	font-size: clamp(12px, 1.5vw, 15px);
 	font-weight: 500;
 	background-color: #302d2e;
 	color: white;
-	overflow-y:auto;
-	line-height: 20px;
-	height: 50vh;
-	width: 45vw;
+	overflow-y: auto;
+	line-height: 1.5;
+	height: clamp(200px, 50vh, 500px);
+	width: clamp(280px, 60vw, 700px);
 	border-top: 20px solid #e5e5e5;
 	border-radius: 4px;
 	box-shadow: 12px 12px 1px #9eb8ce;
-	margin-left: 250px;
+	margin: 0 auto;
+	padding: 12px;
 }
 
 label {
 	color: #f49e67;
+}
+
+/* Override the global #relative margin so it doesn't push console off screen */
+#education-section #relative {
+	position: absolute;
+	right: 4vw;
+}
+
+#education-section .container.row {
+	position: relative;
+}
+
+/* When arrow is hidden on mobile, console takes full width */
+@media (max-width: 900px) {
+	#console {
+		width: clamp(280px, 85vw, 700px);
+	}
+
+	#education-section #relative {
+		margin-left: 0;
+	}
+}
+
+@media (max-width: 480px) {
+	#console {
+		width: 95vw;
+		font-size: 12px;
+	}
 }
