@@ -17,6 +17,7 @@ body{
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important; 
     -webkit-focus-ring-color: rgba(255, 255, 255, 0) !important; 
     outline: none !important;
+	box-sizing: border-box;
 }
 
 p{
@@ -40,7 +41,7 @@ p{
 }
 
 #text-container {
-	padding: 100px;
+	padding: clamp(20px, 5vw, 100px);
 }
 
 .title {
@@ -48,19 +49,20 @@ p{
     text-decoration: none;
 	color: #535353;
 	font-weight: 400;
-	font-size: 350%;
+	font-size: clamp(1.5rem, 6vw, 3.5rem);
 }
 
 .header{
 	color: #535353;
 	font-weight: 400;
 	min-width: 100%;
-	font-size: 300%;
-	padding: 20%;
+	font-size: clamp(1.8rem, 5vw, 3rem);
+	padding: clamp(10px, 3vw, 40px);
+	text-align: center;
 }
 
 #app {
-	font-size:150%;
+	font-size: clamp(1rem, 3vw, 1.5rem);
 	font-family: 'Roboto Mono', monospace;
 }
 
@@ -93,7 +95,7 @@ p{
 
 #relative {
 	position: relative;
-	margin-left: 200px;
+	margin-left: clamp(20px, 5vw, 200px);
 }
 
 .arrow:hover {
@@ -112,4 +114,66 @@ p{
 	60% {
 	  transform: translateX(-15px) rotate(-45deg);
 	}
-  }
+}
+
+/* ── Tablet ── */
+@media (max-width: 768px) {
+	.header {
+		padding: 5vw 4vw;
+		font-size: clamp(1.5rem, 5vw, 2.2rem);
+	}
+
+	#relative {
+		margin-left: 0;
+	}
+}
+
+/* Mobile fixed arrow: hidden by default */
+.arrow-mobile {
+	display: none;
+}
+
+/* ── Mobile ── */
+@media (max-width: 480px) {
+	.header {
+		padding: 6vw 4vw;
+		font-size: 1.5rem;
+	}
+
+	/* Hide the inline arrow */
+	.arrow-section,
+	#relative .arrow {
+		display: none;
+	}
+
+	/* Show and fix the mobile arrow at bottom center */
+	.arrow-mobile {
+		display: block;
+		position: fixed;
+		bottom: 30px;
+		left: 50%;
+		transform: translateX(-50%) rotate(45deg);
+		-webkit-transform: translateX(-50%) rotate(45deg);
+		border: solid #575757;
+		border-width: 0 3px 3px 0;
+		padding: 10px;
+		animation: bounce-down 3s infinite;
+		z-index: 100;
+	}
+
+	.arrow-mobile:hover {
+		opacity: 60%;
+	}
+
+	@keyframes bounce-down {
+		0%, 20%, 50%, 80%, 100% {
+			transform: translateX(-50%) translateY(0) rotate(45deg);
+		}
+		40% {
+			transform: translateX(-50%) translateY(12px) rotate(45deg);
+		}
+		60% {
+			transform: translateX(-50%) translateY(6px) rotate(45deg);
+		}
+	}
+}
